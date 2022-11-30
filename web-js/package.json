@@ -1,0 +1,24 @@
+{
+  "name": "ring-central-region-failover",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel src/index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "pubnub": "^7.2.1"
+  },
+  "devDependencies": {
+    "@types/pubnub": "^7.2.1",
+    "buffer": "^5.7.1",
+    "parcel": "^2.8.0",
+    "typescript": "^4.9.3"
+  },
+  "prettier": {
+    "semi": false
+  }
+}
