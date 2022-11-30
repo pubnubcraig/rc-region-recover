@@ -29,6 +29,7 @@
                                                                    subscribeKey:@"demo"
                                                                            uuid:@"myUniqueUUID"];
   configuration.origin = @"ringcentral.pubnubapi.com";
+  configuration.authKey = @"my-auth-key";
   
   self.pubNubManager = [[PubNubManager alloc] initWithConfiguration:configuration origins:origins];
   [self.pubNubManager addListener:self];

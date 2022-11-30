@@ -78,13 +78,13 @@
 				A5AFE8D02937403B00A34FFF /* SceneDelegate.m */,
 				A5AFE8D22937403B00A34FFF /* ViewController.h */,
 				A5AFE8D32937403B00A34FFF /* ViewController.m */,
+				A5AFE8E52937ECB500A34FFF /* PubNubManager.h */,
+				A5AFE8E62937ECB500A34FFF /* PubNubManager.m */,
 				A5AFE8D52937403B00A34FFF /* Main.storyboard */,
 				A5AFE8D82937403C00A34FFF /* Assets.xcassets */,
 				A5AFE8DA2937403C00A34FFF /* LaunchScreen.storyboard */,
 				A5AFE8DD2937403C00A34FFF /* Info.plist */,
 				A5AFE8DE2937403C00A34FFF /* main.m */,
-				A5AFE8E52937ECB500A34FFF /* PubNubManager.h */,
-				A5AFE8E62937ECB500A34FFF /* PubNubManager.m */,
 			);
 			path = "pubnub-failover";
 			sourceTree = "<group>";

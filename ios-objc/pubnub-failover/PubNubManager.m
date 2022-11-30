@@ -6,7 +6,6 @@
 //
 
 #import "PubNubManager.h"
-#import <Pubnub/PNStatus+Private.h>
 
 
 #pragma mark Static
@@ -14,12 +13,12 @@
 /**
  * @brief Interval at which scheduled timer will try to check main origin availability.
  */
-static NSTimeInterval const kMainOriginCheckInterval = 14.f;
+static NSTimeInterval const kMainOriginCheckInterval = 60.f;
 
 /**
  * @brief How many times it is allowed to fail subscribe before failover will be triggered.
  */
-static NSUInteger const kMaximumRetryCount = 2;
+static NSUInteger const kMaximumRetryCount = 5;
 
 
 #pragma mark - Private interface declaration
@@ -190,8 +189,13 @@ static NSUInteger const kMaximumRetryCount = 2;
     // Endpoint which should be used to check origin reachability.
     NSString *urlString = [NSString stringWithFormat:@"https://%@/v2/subscribe/%@/%@/0",
                            self.origins.firstObject,
-                           [self.client channels].firstObject,
-                           self.client.currentConfiguration.subscribeKey];
+                           self.client.currentConfiguration.subscribeKey,
+                           [self percentEncodedString:[self.client channels].firstObject]];
+    
+    if (self.client.currentConfiguration.authKey.length > 0) {
+      urlString = [urlString stringByAppendingFormat:@"?auth=%@",
+                   [self percentEncodedString:self.client.currentConfiguration.authKey]];
+    }
     
     __weak __typeof(self) weakSelf = self;
     NSURLSession *session = NSURLSession.sharedSession;
@@ -215,6 +219,26 @@ static NSUInteger const kMaximumRetryCount = 2;
       }
     }] resume];
   });
+}
+
+
+#pragma mark - Misc
+
+- (NSString *)percentEncodedString:(NSString *)string {
+  static NSCharacterSet *_allowedCharacters;
+  static dispatch_once_t onceToken;
+  
+  dispatch_once(&onceToken, ^{
+    // Preparing set of characters which shouldn't be percent-encoded.
+    NSMutableCharacterSet *chars = [[NSMutableCharacterSet URLPathAllowedCharacterSet] mutableCopy];
+    [chars formUnionWithCharacterSet:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    [chars formUnionWithCharacterSet:[NSCharacterSet URLFragmentAllowedCharacterSet]];
+    [chars removeCharactersInString:@":/?#[]@!$&’()*+,;="];
+    
+    _allowedCharacters = [chars copy];
+  });
+  
+  return [string stringByAddingPercentEncodingWithAllowedCharacters:_allowedCharacters];
 }
 
 #pragma mark -
