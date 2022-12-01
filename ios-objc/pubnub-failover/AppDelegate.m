@@ -24,7 +24,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  NSArray *origins = @[@"ringcentral-backup-1.pubnubapi.com", @"ringcentral-backup-2.pubnubapi.com"];
+  NSArray *origins = @[@"ringcentral-a.pubnubapi.com", @"ringcentral-b.pubnubapi.com", @"ringcentral-c.pubnubapi.com", @"ringcentral-d.pubnubapi.com"];
   PNConfiguration *configuration = [PNConfiguration configurationWithPublishKey:@"demo"
                                                                    subscribeKey:@"demo"
                                                                            uuid:@"myUniqueUUID"];
