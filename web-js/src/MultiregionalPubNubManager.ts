@@ -193,6 +193,7 @@ export class MultiregionalPubNubManager {
 
   private tryOrigin = async (origin: string, config: Pubnub.PubnubConfig) => {
     const request = await fetch(
+      // TODO: this will require the auth query param for the auth-key so it doesn't 403
       `https://${origin}/v2/subscribe/${config.subscribeKey}/reconnection_test/0`
     )
 
