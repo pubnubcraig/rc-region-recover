@@ -55,6 +55,7 @@ export class MultiregionalPubNubManager {
             }
         };
         this.tryOrigin = async (origin, config) => {
+            // TODO: this will require the auth query param for the auth-key so it doesn't 403
             const request = await fetch(`https://${origin}/v2/subscribe/${config.subscribeKey}/reconnection_test/0`);
             await request.json();
         };
